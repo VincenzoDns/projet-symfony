@@ -1,0 +1,42 @@
+<html>
+    <body>
+    <h1>Top 10 des artistes</h1>
+    {% for artist in artists %}
+        <div>
+
+            {% dump (artist) %}
+
+            <h2>{{ artist.name }}</h2>
+
+            <em>({{  1 == artist.members | length ? 'solo' : 'groupe' }})</em>
+
+        </div>
+            {% if loop.first %}
+                C'est le premier élément
+            {% endif %}
+
+            {% if loop.last %}
+                C'est le dernier élément
+            {% endif %}
+
+            Ariste n° {{ loop.index }} / {{ loop.length }}
+
+        {% if 1 != artist.members|length %}
+            <p>{{ artist.members|sort|join(',') }}</p>
+
+        <p><a href="{{ artist.website }}">{{ artist.website }}</a> </p>
+        {% endif %}
+        <p>{{artist.description}}</p>
+        {% for label in artist.labels %}
+            <h3>{{ label.name }}
+            </h3>
+            {% if label.website %}
+            {% endif %}
+            <a href="{{ label.website }}">Site Web</a>
+            {% endfor %}
+        {% if label.wikipedia %}
+        <a href="{{ label.wikipedia }}">Site wikipedia</a>
+            {% endif %}
+    </body>
+</html>
+
